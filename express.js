@@ -56,6 +56,8 @@ app.get("/cart", function(req, res) {
 // ITEMS ON THE MENU
 app.get("/click", function(req, res) {
 
+  var sql = "call jafi.addToCart(" + id + ")";
+  /**
   var hotdogCounter = 0;
   var burgerCounter = 0;
   var bananaCounter = 0;
@@ -92,7 +94,7 @@ app.get("/click", function(req, res) {
     console.log("Attempting sql ->" + sql + "<-");
   }
 
-
+  **/
 
   connection.query(sql, (function(res) {
     return function(err, rows, fields) {
