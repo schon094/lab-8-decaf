@@ -13,8 +13,6 @@ angular.module('buttons',[])
      $scope.itemClick=itemClick;
      $scope.total;
      $scope.getTotal=getTotal;
-     $scope.getStart=getStart;
-     $scope.getEnd=getEnd;
 
      var loading = false;
 
@@ -44,8 +42,6 @@ angular.module('buttons',[])
        .success(function(data){
          console.log(data);
           $scope.cart=data;
-          $scope.start=data[0].time;
-          $scope.end=data[data.length - 1].time;
           loading=false;
        })
        .error(function () {
@@ -70,15 +66,6 @@ angular.module('buttons',[])
           .error(function(){$scope.errorMessage="Unable click";});
       refreshCart();
       getTotal();
-    }
-
-    function getStart() {
-      startTime = cart[0].time;
-      // startTime = Date.now()
-    }
-
-    function getEnd() {
-      endTime = cart[cart.length - 1].time;
     }
 
     function getTotal(){
@@ -127,5 +114,3 @@ angular.module('buttons',[])
       }
    };
   }
-
-
