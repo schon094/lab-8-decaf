@@ -39,7 +39,8 @@ app.get("/buttons", function(req, res) {
 // attempts to retrieve data from the cart
 // returns an error if unable to
 app.get("/cart", function(req, res) {
-  var sql = 'SELECT * FROM jafi.theCart';
+  var sql = 'select jafi.theCart.*,jafi.theInventory.item from jafi.theCart join jafi.theInventory on jafi.theInventory.itemID =jafi.theCart.itemID;';
+
   connection.query(sql, (function(res) {
     return function(err, rows, fields) {
       if (err) {
@@ -51,12 +52,48 @@ app.get("/cart", function(req, res) {
   })(res));
 });
 
+app.get("/users", function(req, res) {
+  var sql = 'select * from jafi.userButtons;';
 
-//THIS IS WHERE I LEFT OFF I WAS WORKING ON QUERYING FOR DIFFERENT
-// ITEMS ON THE MENU
-app.get("/click", function(req, res) {
+  connection.query(sql, (function(res) {
+    return function(err, rows, fields) {
+      if (err) {
+        console.log("We have an error getting the users:");
+        console.log(err);
+      }
+      res.send(rows);
+    }
+  })(res));
+});
+
+app.get("/user", function(req, res) {
+  console.log("attempting void");
   var id = req.param('id');
 
+/**
+  switch (id) {
+    case 1:
+      var sql = "truncate jafi.theCart;";
+  }
+**/
+  console.log(id);
+
+  var sql = "truncate jafi.theCart;";
+
+  connection.query(sql, (function(res) {
+    return function(err, rows, fields) {
+      if (err) {
+        console.log("void error:");
+        console.log(err);
+      }
+      res.send(rows); // Let the upstream guy know how it went
+    }
+  })(res));
+
+});
+
+app.get("/click", function(req, res) {
+  var id = req.param('id');
 
   var sql = "call jafi.addToCart(" + id + ")";
   /**
@@ -107,11 +144,11 @@ app.get("/click", function(req, res) {
     }
   })(res));
 });
-/*
+
 app.get("/delete", function(req, res) {
   var id = req.param('id');
-
-  var sql = "delete from jafi.cart where item_id=" + id;
+ console.log(id);
+  var sql = "call jafi.removeItem(" + id + ");";
   console.log("Attempting sql ->" + sql + "<-");
 
   connection.query(sql, (function(res) {
@@ -124,7 +161,7 @@ app.get("/delete", function(req, res) {
     }
   })(res));
 });
-*/
+
 app.get("/total", function(req, res) {
   var sql = "select sum(itemTotal) from jafi.theCart;"
   console.log("Attempting sql ->" + sql + "<-");

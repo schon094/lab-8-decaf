@@ -28,6 +28,14 @@
         </div>
       </div>
 
+      <div id="userButtons" align =>
+        <div ng-repeat="user in users">
+          <div style="position:absolute;left:{{user.left}}px;top:{{user.top}}px">
+            <button id="{{user.buttonID}}" ng-click="userClick($event,'user.buttonID');">{{user.label}}</button>
+          </div>
+        </div>
+      </div>
+
       <div align="right">
         <h1>Cart Total:{{total}}</h1>
         <table id="cart" style="width:50%" border="3px solid black" ng-for="item in cart">
@@ -38,10 +46,10 @@
           </tr>
 
           <tr ng-repeat="item in cart">
-            <td>{{item.item_id}}</td>
             <td>{{item.item}}</td>
-            <td>{{item.price}}</td>
-            <td><button id="{{item.item_id}}" ng-click="itemClick($event,'item.item_id');">delete</button></td>
+            <td>{{item.quantity}}</td>
+            <td>${{item.itemTotal}}</td>
+            <td><button id="{{item.itemID}}" ng-click="itemClick($event,'item.itemID');">delete</button></td>
           </tr>
         </table>
       </div>
