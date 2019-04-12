@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/public'));
 // attempts to retrieve the buttons
 // returns error if unable to
 app.get("/buttons", function(req, res) {
-  var sql = 'SELECT * FROM jafi.theButtons';
+  var sql = 'SELECT * FROM jafi.theButtons;';
   connection.query(sql, (function(res) {
     return function(err, rows, fields) {
       if (err) {
@@ -55,6 +55,8 @@ app.get("/cart", function(req, res) {
 //THIS IS WHERE I LEFT OFF I WAS WORKING ON QUERYING FOR DIFFERENT
 // ITEMS ON THE MENU
 app.get("/click", function(req, res) {
+  var id = req.param('id');
+
 
   var sql = "call jafi.addToCart(" + id + ")";
   /**
@@ -62,7 +64,6 @@ app.get("/click", function(req, res) {
   var burgerCounter = 0;
   var bananaCounter = 0;
   var milkdudCounter = 0;
-  var id = req.param('id');
   var startTime = Date();
 
   switch (id) {
@@ -106,7 +107,7 @@ app.get("/click", function(req, res) {
     }
   })(res));
 });
-
+/*
 app.get("/delete", function(req, res) {
   var id = req.param('id');
 
@@ -123,9 +124,9 @@ app.get("/delete", function(req, res) {
     }
   })(res));
 });
-
+*/
 app.get("/total", function(req, res) {
-  var sql = "select sum(price) from jafi.cart;"
+  var sql = "select sum(itemTotal) from jafi.theCart;"
   console.log("Attempting sql ->" + sql + "<-");
 
   connection.query(sql, (function(res) {
