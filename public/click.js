@@ -66,7 +66,6 @@ angular.module('buttons',[])
    }
 
    function refreshCart(){
-     console.log("refreshing cart")
      loading=true;
      $scope.errorMessage='';
      buttonApi.getCart()
@@ -147,8 +146,9 @@ angular.module('buttons',[])
         var url = apiUrl+'/delete?id='+id;
         return $http.get(url);
       },
-      clickUser: function(id,name){
-        var url = apiUrl+'/user?id='+id+'&name='+name;
+      clickUser: function(id){
+        console.log("here: " + currentUser);
+        var url = apiUrl+'/user?id='+id+'&name='+currentUser;
         return $http.get(url);
       },
       getCart: function(){

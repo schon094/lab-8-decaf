@@ -75,7 +75,7 @@ app.get("/user", function(req, res) {
     var sql = "truncate jafi.theCart";
     console.log("TRUNCATEEEEE");
   } else if (id == 2) {
-    var sql = "truncate jafi.theCart";
+    var sql = "call jafi.sale('" + name + "')";
     console.log("@@");
   }
 
