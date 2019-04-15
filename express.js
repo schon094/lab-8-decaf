@@ -67,18 +67,19 @@ app.get("/users", function(req, res) {
 });
 
 app.get("/user", function(req, res) {
-  console.log("attempting void");
   var id = req.param('id');
+  var name = req.param('name');
+  console.log(name);
 
-/**
-  switch (id) {
-    case 1:
-      var sql = "truncate jafi.theCart;";
+  if (id == 1) {
+    var sql = "truncate jafi.theCart";
+    console.log("TRUNCATEEEEE");
+  } else if (id == 2) {
+    var sql = "truncate jafi.theCart";
+    console.log("@@");
   }
-**/
-  console.log(id);
 
-  var sql = "truncate jafi.theCart;";
+  console.log(id);
 
   connection.query(sql, (function(res) {
     return function(err, rows, fields) {
@@ -116,16 +117,16 @@ app.get("/click", function(req, res) {
 
 
   if (id == 1) {
-    var sql = "insert into jafi.cart values('hotdogs',5.99,'null')";
+    var sql = "insert into jafi.users values('null','Isaac')";
     console.log("Attempting sql ->" + sql + "<-");
   } else if (id == 2) {
-    var sql = "insert into jafi.cart values('humburgers',4.19,'null')";
+    var sql = "insert into jafi.cart values('null','John')";
     console.log("Attempting sql ->" + sql + "<-");
   } else if (id == 3) {
-    var sql = "insert into jafi.cart values('bannanas',1.00,'null')";
+    var sql = "insert into jafi.cart values('null','Abe')";
     console.log("Attempting sql ->" + sql + "<-");
   } else if (id == 4) {
-    var sql = "insert into jafi.cart values('milkduds',1.50,'null')";
+    var sql = "insert into jafi.cart values('null','Fransisco')";
     console.log("Attempting sql ->" + sql + "<-");
   } else if (id == 5) {
     var sql = "truncate jafi.cart";

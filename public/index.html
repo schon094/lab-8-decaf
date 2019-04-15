@@ -12,7 +12,7 @@
 
 <body ng-app="buttons">
   <div class="container-fluid">
-    <h1>Cash Register (with buttons)</h1>
+    <h1>Cash Register</h1>
 
     <div id="cart" ng-controller="buttonCtrl">
       <div id="buttons">
@@ -54,6 +54,13 @@
         </table>
       </div>
 
+      <div>
+        <ul>
+        <li ng-repeat="name in names">
+          <button ng-click="setUser(name);">{{name}}</button>
+        </li>
+      </ul>
+      </div>
     </div>
   </div>
 </body>

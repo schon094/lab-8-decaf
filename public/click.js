@@ -8,6 +8,11 @@ angular.module('buttons',[])
      $scope.cart=[];
      $scope.users=[];
 
+     $scope.names = ["Isaac","Abe","Fransisco","John"];
+     $scope.setUser=setUser;
+     $scope.currentUser = "";
+     $scope.getUser=getUser;
+
      $scope.errorMessage='';
      $scope.isLoading=isLoading;
      $scope.refreshButtons=refreshButtons;
@@ -21,6 +26,15 @@ angular.module('buttons',[])
 
      function isLoading(){
       return loading;
+     }
+
+     function setUser($user){
+       currentUser = $user;
+       console.log(currentUser);
+     }
+
+     function getUser(){
+       return currentUser;
      }
 
      function refreshUsers(){
@@ -78,7 +92,7 @@ angular.module('buttons',[])
     function userClick($event){
       console.log("click user");
        $scope.errorMessage='';
-       buttonApi.clickUser($event.target.id)
+       buttonApi.clickUser($event.target.id,currentUser)
           .success(function(){})
           .error(function(){$scope.errorMessage="Unable click";});
           refreshCart();
@@ -96,10 +110,8 @@ angular.module('buttons',[])
     }
 
     function getTotal(){
-      console.log("In getTotal()");
       buttonApi.getTotal()
         .success(function(data){
-          console.log("total = " + data);
            $scope.total=data;
            loading=false;
         })
@@ -135,9 +147,8 @@ angular.module('buttons',[])
         var url = apiUrl+'/delete?id='+id;
         return $http.get(url);
       },
-      clickUser: function(id){
-        var url = apiUrl+'/user?id='+id;
-        console.log("void");
+      clickUser: function(id,name){
+        var url = apiUrl+'/user?id='+id+'&name='+name;
         return $http.get(url);
       },
       getCart: function(){
