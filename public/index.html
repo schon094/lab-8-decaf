@@ -12,11 +12,16 @@
 
 <body ng-app="buttons">
   <div class="container-fluid">
+
+
     <h1>Cash Register</h1>
+
+
+
 
     <div id="cart" ng-controller="buttonCtrl">
 
-      <div id="buttons">
+      <div id="buttons" ng-show="anyoneWorking">
         <div ng-repeat="button in buttons">
           <div style="position:absolute;left:{{button.left}}px;top:{{button.top}}px">
             <button id="{{button.buttonID}}" ng-click="buttonClick($event,'button.buttonID');">{{button.label}}</button>
@@ -30,7 +35,7 @@
       </div>
 
 
-      <div id="userButtons" align =>
+      <div id="userButtons" ng-show="anyoneWorking" ng-click="anyoneWorking=false" align=>
         <div ng-repeat="user in users">
           <div style="position:absolute;left:{{user.left}}px;top:{{user.top}}px">
             <button id="{{user.buttonID}}" ng-click="userClick($event,'user.buttonID');">{{user.label}}</button>
@@ -39,8 +44,8 @@
       </div>
 
 
-      <div align="right">
-        <h1> Cart {{total}}</h1>
+      <div align="right" ng-show="anyoneWorking">
+        <h1>Cart {{total}}</h1>
         <table id="cart" style="width:50%" border="3px solid black" ng-for="item in cart">
           <tr>
             <th>Item</th>
@@ -58,15 +63,15 @@
           </tr>
         </table>
       </div>
-      <div>
+      <div ng-show="!anyoneWorking">
         <ul>
-        <li ng-repeat="name in names">
-          <button ng-click="setUser(name);">{{name}}</button>
-        </li>
-      </ul>
+          <li ng-repeat="name in names">
+            <button ng-click="setUser(name); clockedIn();">{{name}}</button>
+          </li>
+        </ul>
       </div>
       <div align="right">
-<h1> Customer Receipt </h1>
+        <h1> Customer Receipt </h1>
         <table id="receipt" style="width:50%" border="3px solid black" ng-for="item in receipt">
           <tr>
             <th>Receipt Number</th>
