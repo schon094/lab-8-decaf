@@ -52,6 +52,27 @@ app.get("/cart", function(req, res) {
   })(res));
 });
 
+/*########################################################*/
+app.get("/receipt", function(req, res){
+  var sql = 'select * from jafi.transactionSummary order by transactionID desc limit 1;';
+
+  connection.query(sql, (function(res) {
+    return function(err, rows, fields) {
+      if (err) {
+        console.log("We have an error getting the users:");
+        console.log(err);
+      }
+      res.send(rows);
+    }
+  })(res));
+
+});
+
+
+
+
+
+
 app.get("/users", function(req, res) {
   var sql = 'select * from jafi.userButtons;';
 
@@ -65,6 +86,7 @@ app.get("/users", function(req, res) {
     }
   })(res));
 });
+
 
 app.get("/user", function(req, res) {
   var id = req.param('id');
@@ -164,7 +186,7 @@ app.get("/delete", function(req, res) {
 });
 
 app.get("/total", function(req, res) {
-  var sql = "select sum(itemTotal) from jafi.theCart;"
+  var sql = "select sum(itemTotal) as Total from jafi.theCart;"
   console.log("Attempting sql ->" + sql + "<-");
 
   connection.query(sql, (function(res) {

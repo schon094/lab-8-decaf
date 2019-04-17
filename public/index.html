@@ -15,6 +15,7 @@
     <h1>Cash Register</h1>
 
     <div id="cart" ng-controller="buttonCtrl">
+
       <div id="buttons">
         <div ng-repeat="button in buttons">
           <div style="position:absolute;left:{{button.left}}px;top:{{button.top}}px">
@@ -28,6 +29,7 @@
         </div>
       </div>
 
+
       <div id="userButtons" align =>
         <div ng-repeat="user in users">
           <div style="position:absolute;left:{{user.left}}px;top:{{user.top}}px">
@@ -36,14 +38,17 @@
         </div>
       </div>
 
+
       <div align="right">
-        <h1>Cart Total:{{total}}</h1>
+        <h1> Cart {{total}}</h1>
         <table id="cart" style="width:50%" border="3px solid black" ng-for="item in cart">
           <tr>
             <th>Item</th>
             <th>Quantity</th>
             <th>Item Total</th>
+            <th></th>
           </tr>
+
 
           <tr ng-repeat="item in cart">
             <td>{{item.item}}</td>
@@ -53,7 +58,6 @@
           </tr>
         </table>
       </div>
-
       <div>
         <ul>
         <li ng-repeat="name in names">
@@ -61,8 +65,35 @@
         </li>
       </ul>
       </div>
+      <div align="right">
+<h1> Customer Receipt </h1>
+        <table id="receipt" style="width:50%" border="3px solid black" ng-for="item in receipt">
+          <tr>
+            <th>Receipt Number</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+            <th>Employee</th>
+            <th>Checkout Total</th>
+          </tr>
+
+          <tr ng-repeat="item in receipt">
+            <td>{{item.transactionID}}</td>
+            <td>{{item.startTime}}</td>
+            <td>{{item.stopTime}}</td>
+            <td>{{item.duration}}</td>
+            <td>{{item.user}}</td>
+            <td>{{item.total}}</td>
+
+
+          </tr>
+        </table>
+      </div>
+
+
     </div>
   </div>
 </body>
+
 
 </html>

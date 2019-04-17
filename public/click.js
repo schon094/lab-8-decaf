@@ -7,6 +7,7 @@ angular.module('buttons',[])
      $scope.buttons=[]; //Initially all was still
      $scope.cart=[];
      $scope.users=[];
+     $scope.receipt=[];
 
      $scope.names = ["Isaac","Abe","Fransisco","John"];
      $scope.setUser=setUser;
@@ -79,22 +80,41 @@ angular.module('buttons',[])
            loading=false;
        });;
   }
+
+  function refreshReceipt(){
+    loading=true;
+    $scope.errorMessage='';
+    buttonApi.getReceipt()
+      .success(function(data){
+        console.log(data);
+         $scope.receipt=data;
+         loading=false;
+      })
+      .error(function () {
+          $scope.errorMessage="Unable to load Receipt:  Database request failed";
+          loading=false;
+      });;
+ }
+
+
     function buttonClick($event){
        $scope.errorMessage='';
        buttonApi.clickButton($event.target.id)
           .success(function(){})
           .error(function(){$scope.errorMessage="Unable click";});
       refreshCart();
+      refreshReceipt();
       getTotal();
     }
 ;
     function userClick($event){
       console.log("click user");
        $scope.errorMessage='';
-       buttonApi.clickUser($event.target.id,currentUser)
+       buttonApi.clickUser($event.target.id)
           .success(function(){})
           .error(function(){$scope.errorMessage="Unable click";});
           refreshCart();
+          refreshReceipt();
           getTotal();
     }
 
@@ -105,6 +125,7 @@ angular.module('buttons',[])
           .success(function(){})
           .error(function(){$scope.errorMessage="Unable click";});
       refreshCart();
+      refreshReceipt();
       getTotal();
     }
 
@@ -125,6 +146,7 @@ angular.module('buttons',[])
     getTotal();
     refreshUsers();
     refreshCart();
+    refreshReceipt();
 
   }
 
@@ -153,6 +175,10 @@ angular.module('buttons',[])
       },
       getCart: function(){
         var url = apiUrl + '/cart';
+        return $http.get(url);
+      },
+      getReceipt: function(){
+        var url = apiUrl + '/receipt';
         return $http.get(url);
       },
       getTotal: function(){
