@@ -1,16 +1,16 @@
 # Lab 9 Documentation
 
-** Abenezer Monjor
-** John Schonebaum 
-** Isaac Yoakum
-** Francisco Montanez
-** Database: jafi
+   ##### Abenezer Monjor
+   ##### John Schonebaum 
+   ##### Isaac Yoakum
+   ##### Francisco Montanez
+ ##### Database: jafi
 
 
-*Log in
+### Log in
 To log in there are 4 user buttons that could be clicked. Until they are clicked no other function can be used. When you make a sale or void a transaction you must log in again. And to log out click void.
 
-*Register buttons
+### Register buttons
 
 GET/buttons
 http://localhost:1337/buttons/
@@ -36,7 +36,7 @@ http://localhost:1337/buttons/
 "top":120,
 "width":100}]
 ```
-*VOID and SALE
+### VOID and SALE
 GET/users
 http://localhost:1337/users
 
@@ -57,12 +57,12 @@ the VOID button sends a request to truncate table theCart
 the SALE button calls the MySQL procedure sale(user), which records the stores the current sale
 in transactionSummary
 
-*Delete
+### Delete
 Delete items with selected id. eg. id =1
 http://localhost:1337/delete?id=1
 
 
-*Cart
+### Cart
 GET/ cart
 http://localhost:1337/cart
 
@@ -83,7 +83,7 @@ Gets information from table theCart
 
 ```
 
-*Reciept
+### Reciept
 GET/receipt
 http://localhost:1337/receipt
 
@@ -102,11 +102,11 @@ gets newest item from transactionSummary table
 ]
 ```
 
-*Click
+### Click
 add items with selected id. eg. id = 1 which is hotdog.
 http://localhost:1337/click?id=1
 
-*Total
+### Total
 display total of items in cart
 http://localhost:1337/total
 
